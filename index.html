@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test JS</title>
+</head>
+<body>
+
+    <p>Trouver le nombre mystère entre 1 et 100</p>
+
+    <div>
+        <form id="form" onsubmit="return verif();">
+            <div>
+                <input type="text" id="valeur" size="4">
+                <input type="submit" value="Tester">
+            </div>
+        </form>
+    </div>
+    
+    <p id="resultat"></p>
+
+    <script>
+        function verif(){
+            var valeurProposer = valeur.value;
+            var pattern = /^\d+$/;
+
+            if(pattern.test(valeurProposer)){
+
+                nombreEssai++;
+                valeurProposer = parseInt(valeurProposer);
+
+                if(valeurProposer < valeurMystere){
+
+                    document.getElementById('resultat').innerHTML = "Le nombre à trouver est plus grand.";
+                    valeur.value = '';
+                    valeur.focus();
+
+                }else if(valeurProposer > valeurMystere){
+
+                    document.getElementById('resultat').innerHTML = "Le nombre à trouver est plus petit.";
+                    valeur.value = '';
+                    valeur.focus();
+
+                }else{
+
+                    document.getElementById('resultat').innerHTML = "Tu as gagner en " + nombreEssai + " coups !";
+
+                }
+            } else {
+
+                document.getElementById('resultat').innerHTML = "La valeur proposée doit être un nombre.";
+
+            }
+            return false;
+        }
+
+        var valeurMax = 100;
+        var valeurMystere = Math.floor((Math.random() * valeurMax) + 1);
+        var nombreEssai = 0;
+        var valeur = document.getElementById('valeur')
+
+        if(valeurMystere > valeurMax){
+            valeurMystere = valeurMax;
+        }
+
+        document.getElementById('valeurMax').innerHTML = valeurMax;
+        valeur.value = '';
+        valeur.focus();
+    </script>
+
+</body>
+</html>
